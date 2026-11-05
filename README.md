@@ -131,6 +131,39 @@ steamfix\steamfix.exe fix -r     :: sửa + mở lại Steam
 - Muốn tự build: `powershell -ExecutionPolicy Bypass -File scripts/build-exe.ps1`
   (cần Python + PyInstaller trên máy build, máy đích thì không).
 
+### Windows — một dòng lệnh trong `cmd`, không cài gì
+
+Dán vào `cmd` (máy chỉ cần Windows 10/11 x64 + mạng):
+
+```bat
+curl -fsSL -o "%TEMP%\steamfix.cmd" https://raw.githubusercontent.com/BaoTaoBao/steamfix/main/scripts/steamfix.cmd && "%TEMP%\steamfix.cmd" fix -r
+```
+
+Script tự tải bản mới nhất từ Releases, giải nén vào `%LOCALAPPDATA%\SteamFix` rồi chạy.
+Các lần sau dùng lại lệnh trên (bản đã tải nên chạy ngay), hoặc gọi thẳng:
+
+```bat
+"%LOCALAPPDATA%\SteamFix\steamfix\steamfix.exe" check
+"%LOCALAPPDATA%\SteamFix\steamfix\steamfix.exe" fix -r
+```
+
+### Windows — cài để gõ `steamfix` như một lệnh
+
+```bat
+curl -fsSL -o "%TEMP%\steamfix-install.cmd" https://raw.githubusercontent.com/BaoTaoBao/steamfix/main/scripts/install.cmd && "%TEMP%\steamfix-install.cmd"
+```
+
+Sau đó **mở `cmd` mới** và dùng:
+
+```bat
+steamfix check
+steamfix fix -r
+```
+
+Cài vào `%LOCALAPPDATA%\SteamFix`, thêm launcher `steamfix.cmd` vào
+`%LOCALAPPDATA%\Microsoft\WindowsApps` (đã có sẵn trong PATH) — **không cần quyền admin**.
+Gỡ cài đặt: xoá 2 đường dẫn trên. Cập nhật: chạy lại lệnh `install` là xong.
+
 ## Sử dụng
 
 | Lệnh | Việc làm |
