@@ -72,11 +72,17 @@ try {
 
             # Kiem tra SHA-256 (neu asset checksum ton tai); sai thi dung han.
             try {
-                $expected = ((Invoke-WebRequest -Uri $ShaUrl -UseBasicParsing -TimeoutSec 20).Content -split '\s+')[0].ToLower()
+                $response = Invoke-WebRequest -Uri $ShaUrl -UseBasicParsing -TimeoutSec 20
+                $content = $response.Content
+                # PS 5.1 co the tra ve byte[] cho file text -> phai giai ma.
+                if ($content -is [byte[]]) { $content = [Text.Encoding]::UTF8.GetString($content) }
+                $expected = ([string]$content -split '\s+')[0].ToLower()
                 if ($expected -match '^[0-9a-f]{64}$') {
                     $actual = (Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLower()
                     if ($actual -ne $expected) { throw 'SHA-256 khong khop - file tai ve bi loi, thu lai sau.' }
                     Write-Ok "Da kiem tra SHA-256 ($($expected.Substring(0,12))...)"
+                } else {
+                    Write-Warn 'File checksum khong hop le - bo qua buoc kiem tra.'
                 }
             } catch {
                 if ($_.Exception.Message -match 'SHA-256') { throw }
