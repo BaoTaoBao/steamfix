@@ -102,6 +102,9 @@ pip install git+https://github.com/BaoTaoBao/steamfix
 git clone https://github.com/BaoTaoBao/steamfix
 cd steamfix
 python -m pip install -e .
+
+# hoặc tải sẵn wheel/sdist ở trang Releases
+# https://github.com/BaoTaoBao/steamfix/releases
 ```
 
 Chạy không cần cài: `python -m steamfix` (sau khi thêm `src` vào `PYTHONPATH`).
