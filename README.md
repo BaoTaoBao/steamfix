@@ -131,6 +131,29 @@ steamfix\steamfix.exe fix -r     :: sửa + mở lại Steam
 - Muốn tự build: `powershell -ExecutionPolicy Bypass -File scripts/build-exe.ps1`
   (cần Python + PyInstaller trên máy build, máy đích thì không).
 
+### Windows — một dòng lệnh kiểu `irm ... | iex` (nhanh nhất) ⚡
+
+Mở **PowerShell** và dán:
+
+```powershell
+irm https://raw.githubusercontent.com/BaoTaoBao/steamfix/main/install.ps1 | iex
+```
+
+Hoặc từ **cmd**:
+
+```bat
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/BaoTaoBao/steamfix/main/install.ps1 | iex"
+```
+
+Script làm hết: tải bản mới nhất → **kiểm tra SHA-256** → giải nén vào `%LOCALAPPDATA%\SteamFix`
+→ chạy `steamfix fix`. Muốn làm việc khác thì đặt biến môi trường trước khi chạy:
+
+```powershell
+$env:STEAMFIX_ARGS = 'check';  irm https://raw.githubusercontent.com/BaoTaoBao/steamfix/main/install.ps1 | iex
+```
+
+Script chỉ ~5 KB, đọc trước khi chạy được: [`install.ps1`](install.ps1).
+
 ### Windows — một dòng lệnh trong `cmd`, không cài gì
 
 Dán vào `cmd` (máy chỉ cần Windows 10/11 x64 + mạng):
