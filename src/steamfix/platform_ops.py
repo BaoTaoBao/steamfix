@@ -41,6 +41,17 @@ def admin_hint() -> str:
     return "Chạy lại bằng: sudo -E steamfix ..."
 
 
+def self_arguments(args: Sequence[str]) -> Tuple[str, str]:
+    """Trả về (file thực thi, chuỗi tham số) để mở lại chính app.
+
+    Hỗ trợ cả bản chạy bằng Python (`python -m steamfix ...`) và bản đóng gói
+    bằng PyInstaller (`steamfix.exe ...`).
+    """
+    if getattr(sys, "frozen", False):  # bản .exe đóng gói
+        return sys.executable, subprocess.list2cmdline(list(args))
+    return sys.executable, subprocess.list2cmdline(["-m", "steamfix", *args])
+
+
 def elevate(args: Sequence[str]) -> bool:
     """Mở lại chính app với quyền cao (chỉ Windows). Trả True nếu đã gửi lệnh."""
     if not IS_WINDOWS:
@@ -48,8 +59,8 @@ def elevate(args: Sequence[str]) -> bool:
     try:
         import ctypes
 
-        params = subprocess.list2cmdline([sys.executable, "-m", "steamfix", *args])
-        result = ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+        exe, params = self_arguments(args)
+        result = ctypes.windll.shell32.ShellExecuteW(None, "runas", exe, params, None, 1)
         return int(result) > 32
     except Exception:
         return False
@@ -101,8 +112,9 @@ def elevate_and_wait(args: Sequence[str]) -> Optional[int]:
         info.cbSize = ctypes.sizeof(info)
         info.fMask = SEE_MASK_NOCLOSEPROCESS
         info.lpVerb = "runas"
-        info.lpFile = sys.executable
-        info.lpParameters = subprocess.list2cmdline(["-m", "steamfix", *args])
+        exe, params = self_arguments(args)
+        info.lpFile = exe
+        info.lpParameters = params
         info.nShow = 1
 
         if not shell32.ShellExecuteExW(ctypes.byref(info)):

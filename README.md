@@ -112,6 +112,25 @@ Chạy không cần cài: `python -m steamfix` (sau khi thêm `src` vào `PYTHON
 > Trên Windows, app cần quyền Administrator để ghi `hosts`. SteamFix tự mở hộp thoại UAC
 > và chờ tiến trình có quyền chạy xong, rồi trả đúng mã thoát.
 
+### Windows — không cần cài Python
+
+Tải `steamfix-2.0.0-windows-x64.zip` ở trang [**Releases**](https://github.com/BaoTaoBao/steamfix/releases),
+giải nén ra một thư mục bất kỳ, rồi chạy:
+
+```bat
+steamfix\steamfix.exe            :: kiểm tra + sửa
+steamfix\steamfix.exe check      :: chỉ kiểm tra
+steamfix\steamfix.exe revert     :: gỡ cấu hình
+steamfix\steamfix.exe fix -r     :: sửa + mở lại Steam
+```
+
+- Lần chạy đầu hiện hộp thoại **UAC** → bấm **Yes** (cần quyền admin để sửa `hosts`).
+- File `.exe` chưa ký số nên SmartScreen/Defender có thể cảnh báo →
+  **More info → Run anyway**.
+- Bản này là *onedir*: giữ nguyên cả thư mục `steamfix\` (đừng copy lẻ file `.exe`).
+- Muốn tự build: `powershell -ExecutionPolicy Bypass -File scripts/build-exe.ps1`
+  (cần Python + PyInstaller trên máy build, máy đích thì không).
+
 ## Sử dụng
 
 | Lệnh | Việc làm |
