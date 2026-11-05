@@ -1,0 +1,32 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Build
+build/
+dist/
+*.whl
+
+# Môi trường ảo
+.venv/
+venv/
+env/
+
+# Test / lint
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Công cụ soạn thảo / HĐH
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Đầu ra của chính công cụ
+SteamFix.log
+report.json
+*.log
