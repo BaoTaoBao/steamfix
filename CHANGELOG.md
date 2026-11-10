@@ -3,6 +3,22 @@
 Mọi thay đổi đáng chú ý của dự án được ghi ở đây.
 Định dạng theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo [SemVer](https://semver.org/lang/vi/).
 
+## [2.1.0] — 2026-11-10
+
+Bản dành cho người dùng cuối: tải file, double-click, xong.
+
+### Thêm mới
+
+- **`SteamFix.cmd`** ở thư mục gốc: tự xin quyền admin (UAC), tự tải bản mới nhất từ Releases,
+  kiểm tra SHA-256, giải nén vào `%LOCALAPPDATA%\SteamFix`, chạy `fix` và giữ cửa sổ để đọc kết quả.
+  Không cần Python, git hay pipx; không phải gõ lệnh nào.
+- Truyền lệnh tuỳ chọn khi cần: `SteamFix.cmd check`, `SteamFix.cmd revert`, `SteamFix.cmd "fix -r"`.
+- Thông báo lỗi rõ ràng cho từng mã thoát (2/3/4) và hướng dẫn khắc phục ngay trong cửa sổ.
+
+### Thay đổi
+
+- Số hiệu phiên bản 2.1.0 cho gói Python, bản `.exe` và các script bootstrap.
+
 ## [2.0.0] — 2026-11-05
 
 Viết lại toàn bộ bằng Python, gộp các tính năng của bản PowerShell 1.x và mở rộng đa nền tảng.

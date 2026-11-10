@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Tuple
 
 APP_NAME = "SteamFix"
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 __version__ = VERSION
 
 #: Tên miền được quản lý (viết thường, không có dấu chấm cuối).

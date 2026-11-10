@@ -9,10 +9,28 @@
 
 Không VPN, không proxy, không cài service. Một lệnh, có backup, hoàn tác được.
 
+## Cách nhanh nhất — tải file, double-click ✅
+
+1. Mở **[SteamFix.cmd](https://github.com/BaoTaoBao/steamfix/blob/main/SteamFix.cmd)** → bấm **Download raw file**
+   (hoặc chuột phải vào nút *Raw* → *Save link as...*).
+2. **Double-click** file vừa tải → bấm **Yes** ở hộp thoại UAC.
+3. Xong. Cửa sổ hiện tiến trình và kết quả, không phải gõ gì.
+
+Script tự: xin quyền admin → tải bản mới nhất từ Releases → kiểm tra SHA-256 → giải nén vào
+`%LOCALAPPDATA%\SteamFix` → chạy `steamfix fix` → giữ cửa sổ để bạn đọc kết quả.
+
+Không cần Python, không cần git, không cần pipx. Muốn làm việc khác thì mở `cmd` tại thư mục đó:
+
+```bat
+SteamFix.cmd check      :: chỉ kiểm tra
+SteamFix.cmd revert     :: gỡ cấu hình
+SteamFix.cmd "fix -r"   :: sửa + mở lại Steam
+```
+
 ```console
 $ steamfix
 ==============================================================================
-  SteamFix 2.0.0 — TỰ ĐỘNG SỬA
+  SteamFix 2.1.0 — TỰ ĐỘNG SỬA
 ==============================================================================
 
 [1] Kiểm tra hiện trạng
@@ -114,7 +132,7 @@ Chạy không cần cài: `python -m steamfix` (sau khi thêm `src` vào `PYTHON
 
 ### Windows — không cần cài Python
 
-Tải `steamfix-2.0.0-windows-x64.zip` ở trang [**Releases**](https://github.com/BaoTaoBao/steamfix/releases),
+Tải `steamfix-windows-x64.zip` ở trang [**Releases**](https://github.com/BaoTaoBao/steamfix/releases),
 giải nén ra một thư mục bất kỳ, rồi chạy:
 
 ```bat
